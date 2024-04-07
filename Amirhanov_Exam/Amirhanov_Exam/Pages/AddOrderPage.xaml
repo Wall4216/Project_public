@@ -1,0 +1,54 @@
+﻿<Page x:Class="Amirhanov_Exam.Pages.AddOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddOrderPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel LastChildFill="False" Grid.Row="0">
+            <Image Source="../Images/logo.png" Height="50" DockPanel.Dock="Left"/>
+            <TextBlock Text="Это конец" 
+                FontSize="24" 
+                Padding="10,0,0,0" 
+                VerticalAlignment="Center" 
+                DockPanel.Dock="Left"/>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button Content="Просмотр заявок" Margin="10" Click="CallCenterPage_Click"/>
+                <Button Content="Выйти" Margin="10" Click="Logout_Click" Width="100"/>
+            </StackPanel>
+        </DockPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <TextBlock Text="Адрес:" Margin="5"/>
+            <TextBox x:Name="AddressBox" Margin="5"/>
+
+            <TextBlock Text="Количество комнат:" Margin="5"/>
+            <TextBox x:Name="RoomCountBox" Margin="5"/>
+
+            <TextBlock Text="Общая площадь:" Margin="5"/>
+            <TextBox x:Name="TotalAreaBox" Margin="5"/>
+
+            <TextBlock Text="Дата и время:" Margin="5"/>
+            <DatePicker x:Name="DatePicker" Margin="5"/>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Часы:" VerticalAlignment="Center" Margin="2"/>
+                <ComboBox x:Name="HoursBox" Width="60" Margin="2"/>
+                <TextBlock Text="Минуты:" VerticalAlignment="Center" Margin="2"/>
+                <ComboBox x:Name="MinutesBox" Width="60" Margin="2"/>
+            </StackPanel>
+
+            <TextBlock Text="Статус:" Margin="5"/>
+            <ComboBox x:Name="StatusBox" Margin="5"/>
+
+            <Button Content="Добавить заказ" Margin="5" Click="AddOrder_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

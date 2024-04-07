@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Ilnaz_ExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CleaningGroupMembers">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="AssignedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__CleaningG__Emplo__46E78A0C" FromRole="CleaningGroupMembers" ToRole="Employees" />
+    <NavigationProperty Name="CleaningGroups" Relationship="Self.FK__CleaningG__Group__45F365D3" FromRole="CleaningGroupMembers" ToRole="CleaningGroups" />
+  </EntityType>
+  <EntityType Name="CleaningGroups">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CleaningGroupMembers" Relationship="Self.FK__CleaningG__Group__45F365D3" FromRole="CleaningGroups" ToRole="CleaningGroupMembers" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__CleaningG__Order__4316F928" FromRole="CleaningGroups" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SecretWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CleaningGroupMembers" Relationship="Self.FK__CleaningG__Emplo__46E78A0C" FromRole="Employees" ToRole="CleaningGroupMembers" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__RoleI__3C69FB99" FromRole="Employees" ToRole="Roles" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Employee__3F466844" FromRole="Employees" ToRole="Orders" />
+    <NavigationProperty Name="Report" Relationship="Self.FK__Report__Employee__4AB81AF0" FromRole="Employees" ToRole="Report" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoomCount" Type="Int32" Nullable="false" />
+    <Property Name="TotalArea" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CleaningGroups" Relationship="Self.FK__CleaningG__Order__4316F928" FromRole="Orders" ToRole="CleaningGroups" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Orders__Employee__3F466844" FromRole="Orders" ToRole="Employees" />
+    <NavigationProperty Name="Statuses" Relationship="Self.FK__Orders__StatusID__403A8C7D" FromRole="Orders" ToRole="Statuses" />
+    <NavigationProperty Name="Report" Relationship="Self.FK__Report__OrderID__49C3F6B7" FromRole="Orders" ToRole="Report" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="ReportID" />
+    </Key>
+    <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Consumables" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Report__Employee__4AB81AF0" FromRole="Report" ToRole="Employees" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Report__OrderID__49C3F6B7" FromRole="Report" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__RoleI__3C69FB99" FromRole="Roles" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__StatusID__403A8C7D" FromRole="Statuses" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK__CleaningG__Emplo__46E78A0C">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="CleaningGroupMembers" Type="Self.CleaningGroupMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="CleaningGroupMembers">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CleaningG__Group__45F365D3">
+    <End Role="CleaningGroups" Type="Self.CleaningGroups" Multiplicity="1" />
+    <End Role="CleaningGroupMembers" Type="Self.CleaningGroupMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CleaningGroups">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="CleaningGroupMembers">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CleaningG__Order__4316F928">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="CleaningGroups" Type="Self.CleaningGroups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="CleaningGroups">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__RoleI__3C69FB99">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Employee__3F466844">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Report__Employee__4AB81AF0">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Report" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__StatusID__403A8C7D">
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statuses">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Report__OrderID__49C3F6B7">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Report" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Ilnaz_ExamEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CleaningGroupMembers" EntityType="Self.CleaningGroupMembers" />
+    <EntitySet Name="CleaningGroups" EntityType="Self.CleaningGroups" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Report" EntityType="Self.Report" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+    <AssociationSet Name="FK__CleaningG__Emplo__46E78A0C" Association="Self.FK__CleaningG__Emplo__46E78A0C">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="CleaningGroupMembers" EntitySet="CleaningGroupMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CleaningG__Group__45F365D3" Association="Self.FK__CleaningG__Group__45F365D3">
+      <End Role="CleaningGroups" EntitySet="CleaningGroups" />
+      <End Role="CleaningGroupMembers" EntitySet="CleaningGroupMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CleaningG__Order__4316F928" Association="Self.FK__CleaningG__Order__4316F928">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="CleaningGroups" EntitySet="CleaningGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__RoleI__3C69FB99" Association="Self.FK__Employees__RoleI__3C69FB99">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Employee__3F466844" Association="Self.FK__Orders__Employee__3F466844">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Report__Employee__4AB81AF0" Association="Self.FK__Report__Employee__4AB81AF0">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__StatusID__403A8C7D" Association="Self.FK__Orders__StatusID__403A8C7D">
+      <End Role="Statuses" EntitySet="Statuses" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Report__OrderID__49C3F6B7" Association="Self.FK__Report__OrderID__49C3F6B7">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
