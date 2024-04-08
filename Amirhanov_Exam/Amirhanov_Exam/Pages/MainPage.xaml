@@ -1,0 +1,8 @@
+﻿<Window x:Class="Amirhanov_Exam.Pages.MainPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Главная страница" Height="450" Width="800">
+    <Grid>
+        <Frame x:Name="MainContentFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

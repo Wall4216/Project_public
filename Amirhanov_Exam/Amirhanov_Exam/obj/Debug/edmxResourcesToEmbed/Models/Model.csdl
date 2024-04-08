@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Ilnaz_ExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="CleaningGroupMembers">
     <Key>
       <PropertyRef Name="MemberID" />
@@ -10,17 +10,15 @@
     <Property Name="AssignedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Employees" Relationship="Self.FK__CleaningG__Emplo__46E78A0C" FromRole="CleaningGroupMembers" ToRole="Employees" />
-    <NavigationProperty Name="CleaningGroups" Relationship="Self.FK__CleaningG__Group__45F365D3" FromRole="CleaningGroupMembers" ToRole="CleaningGroups" />
   </EntityType>
   <EntityType Name="CleaningGroups">
     <Key>
       <PropertyRef Name="GroupID" />
     </Key>
     <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="CleaningGroupMembers" Relationship="Self.FK__CleaningG__Group__45F365D3" FromRole="CleaningGroups" ToRole="CleaningGroupMembers" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK__CleaningG__Order__4316F928" FromRole="CleaningGroups" ToRole="Orders" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_CleaningGroups" FromRole="CleaningGroups" ToRole="Orders" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
@@ -49,7 +47,8 @@
     <Property Name="TotalArea" Type="Double" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="StatusID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CleaningGroups" Relationship="Self.FK__CleaningG__Order__4316F928" FromRole="Orders" ToRole="CleaningGroups" />
+    <Property Name="CleaningGroupId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CleaningGroups" Relationship="Self.FK_Orders_CleaningGroups" FromRole="Orders" ToRole="CleaningGroups" />
     <NavigationProperty Name="Employees" Relationship="Self.FK__Orders__Employee__3F466844" FromRole="Orders" ToRole="Employees" />
     <NavigationProperty Name="Statuses" Relationship="Self.FK__Orders__StatusID__403A8C7D" FromRole="Orders" ToRole="Statuses" />
     <NavigationProperty Name="Report" Relationship="Self.FK__Report__OrderID__49C3F6B7" FromRole="Orders" ToRole="Report" />
@@ -85,6 +84,16 @@
     <Property Name="StatusDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__StatusID__403A8C7D" FromRole="Statuses" ToRole="Orders" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <Association Name="FK__CleaningG__Emplo__46E78A0C">
     <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
     <End Role="CleaningGroupMembers" Type="Self.CleaningGroupMembers" Multiplicity="*" />
@@ -97,27 +106,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CleaningG__Group__45F365D3">
+  <Association Name="FK_Orders_CleaningGroups">
     <End Role="CleaningGroups" Type="Self.CleaningGroups" Multiplicity="1" />
-    <End Role="CleaningGroupMembers" Type="Self.CleaningGroupMembers" Multiplicity="*" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CleaningGroups">
         <PropertyRef Name="GroupID" />
       </Principal>
-      <Dependent Role="CleaningGroupMembers">
-        <PropertyRef Name="GroupID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CleaningG__Order__4316F928">
-    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-    <End Role="CleaningGroups" Type="Self.CleaningGroups" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Orders">
-        <PropertyRef Name="OrderID" />
-      </Principal>
-      <Dependent Role="CleaningGroups">
-        <PropertyRef Name="OrderID" />
+      <Dependent Role="Orders">
+        <PropertyRef Name="CleaningGroupId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -181,7 +178,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Ilnaz_ExamEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CleaningGroupMembers" EntityType="Self.CleaningGroupMembers" />
     <EntitySet Name="CleaningGroups" EntityType="Self.CleaningGroups" />
     <EntitySet Name="Employees" EntityType="Self.Employees" />
@@ -189,17 +186,14 @@
     <EntitySet Name="Report" EntityType="Self.Report" />
     <EntitySet Name="Roles" EntityType="Self.Roles" />
     <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <AssociationSet Name="FK__CleaningG__Emplo__46E78A0C" Association="Self.FK__CleaningG__Emplo__46E78A0C">
       <End Role="Employees" EntitySet="Employees" />
       <End Role="CleaningGroupMembers" EntitySet="CleaningGroupMembers" />
     </AssociationSet>
-    <AssociationSet Name="FK__CleaningG__Group__45F365D3" Association="Self.FK__CleaningG__Group__45F365D3">
+    <AssociationSet Name="FK_Orders_CleaningGroups" Association="Self.FK_Orders_CleaningGroups">
       <End Role="CleaningGroups" EntitySet="CleaningGroups" />
-      <End Role="CleaningGroupMembers" EntitySet="CleaningGroupMembers" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CleaningG__Order__4316F928" Association="Self.FK__CleaningG__Order__4316F928">
       <End Role="Orders" EntitySet="Orders" />
-      <End Role="CleaningGroups" EntitySet="CleaningGroups" />
     </AssociationSet>
     <AssociationSet Name="FK__Employees__RoleI__3C69FB99" Association="Self.FK__Employees__RoleI__3C69FB99">
       <End Role="Roles" EntitySet="Roles" />

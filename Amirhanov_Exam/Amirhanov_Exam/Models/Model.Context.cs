@@ -13,10 +13,10 @@ namespace Amirhanov_Exam.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Ilnaz_ExamEntities : DbContext
+    public partial class Entities3 : DbContext
     {
-        public Ilnaz_ExamEntities()
-            : base("name=Ilnaz_ExamEntities")
+        public Entities3()
+            : base("name=Entities3")
         {
         }
     
@@ -32,5 +32,6 @@ namespace Amirhanov_Exam.Models
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Statuses> Statuses { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

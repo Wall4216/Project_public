@@ -21,6 +21,5 @@ namespace Amirhanov_Exam.Models
         public bool IsActive { get; set; }
     
         public virtual Employees Employees { get; set; }
-        public virtual CleaningGroups CleaningGroups { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace Amirhanov_Exam.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orders()
         {
-            this.CleaningGroups = new HashSet<CleaningGroups>();
             this.Report = new HashSet<Report>();
         }
     
@@ -28,9 +27,9 @@ namespace Amirhanov_Exam.Models
         public double TotalArea { get; set; }
         public System.DateTime Date { get; set; }
         public int StatusID { get; set; }
+        public int CleaningGroupId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CleaningGroups> CleaningGroups { get; set; }
+        public virtual CleaningGroups CleaningGroups { get; set; }
         public virtual Employees Employees { get; set; }
         public virtual Statuses Statuses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

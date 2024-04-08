@@ -38,15 +38,12 @@
 
             <TextBlock Text="Дата и время:" Margin="5"/>
             <DatePicker x:Name="DatePicker" Margin="5"/>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Text="Часы:" VerticalAlignment="Center" Margin="2"/>
-                <ComboBox x:Name="HoursBox" Width="60" Margin="2"/>
-                <TextBlock Text="Минуты:" VerticalAlignment="Center" Margin="2"/>
-                <ComboBox x:Name="MinutesBox" Width="60" Margin="2"/>
-            </StackPanel>
 
             <TextBlock Text="Статус:" Margin="5"/>
             <ComboBox x:Name="StatusBox" Margin="5"/>
+
+            <TextBlock Text="Группа уборки:" Margin="5"/>
+            <ComboBox x:Name="CleaningGroupBox" Margin="5"/>
 
             <Button Content="Добавить заказ" Margin="5" Click="AddOrder_Click"/>
         </StackPanel>

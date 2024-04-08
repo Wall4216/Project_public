@@ -26,6 +26,7 @@ namespace Amirhanov_Exam.Pages
         {
             InitializeComponent();
             LoadStatuses();
+            LoadCleaningGroups(); 
         }
 
         private void LoadStatuses()
@@ -33,6 +34,12 @@ namespace Amirhanov_Exam.Pages
             StatusBox.ItemsSource = App.DB.Statuses.ToList();
             StatusBox.DisplayMemberPath = "StatusName";
             StatusBox.SelectedValuePath = "StatusID";
+        }
+        private void LoadCleaningGroups()
+        {
+            CleaningGroupBox.ItemsSource = App.DB.CleaningGroups.ToList();
+            CleaningGroupBox.DisplayMemberPath = "GroupName";
+            CleaningGroupBox.SelectedValuePath = "GroupID";
         }
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
@@ -42,34 +49,40 @@ namespace Amirhanov_Exam.Pages
                 string.IsNullOrWhiteSpace(TotalAreaBox.Text) ||
                 DatePicker.SelectedDate == null ||
                 StatusBox.SelectedItem == null ||
-                HoursBox.SelectedItem == null ||
-                MinutesBox.SelectedItem == null)
+                CleaningGroupBox.SelectedItem == null)
             {
                 MessageBox.Show("Все поля должны быть заполнены.");
                 return;
             }
 
-            var selectedDate = DatePicker.SelectedDate.Value.Date;
-            var hours = int.Parse(HoursBox.SelectedItem.ToString());
-            var minutes = int.Parse(MinutesBox.SelectedItem.ToString());
-            var time = new TimeSpan(hours, minutes, 0);
-            var dateTime = selectedDate + time;
+            if (!int.TryParse(RoomCountBox.Text, out int roomCount))
+            {
+                MessageBox.Show("Количество комнат должно быть числом.");
+                return;
+            }
+
+            if (!double.TryParse(TotalAreaBox.Text, out double totalArea))
+            {
+                MessageBox.Show("Общая площадь должна быть числом.");
+                return;
+            }
 
             var newOrder = new Orders
             {
-                EmployeeID = App.loggedEmployee.EmployeeID,
+                EmployeeID = App.loggedEmployee.EmployeeID, 
                 Address = AddressBox.Text,
-                RoomCount = int.Parse(RoomCountBox.Text),
-                TotalArea = double.Parse(TotalAreaBox.Text),
-                Date = dateTime,
-                StatusID = (int)StatusBox.SelectedValue
+                RoomCount = roomCount,
+                TotalArea = totalArea,
+                Date = DatePicker.SelectedDate.Value.Date,
+                StatusID = (int)StatusBox.SelectedValue,
+                CleaningGroupId = (int)CleaningGroupBox.SelectedValue 
             };
 
-            App.DB.Orders.Add(newOrder);
-            App.DB.SaveChanges();
+            App.DB.Orders.Add(newOrder); 
+            App.DB.SaveChanges(); 
 
             MessageBox.Show("Заказ успешно добавлен.");
-            NavigationService.GoBack();
+            NavigationService?.GoBack(); 
         }
 
         private void CallCenterPage_Click(object sender, RoutedEventArgs e)

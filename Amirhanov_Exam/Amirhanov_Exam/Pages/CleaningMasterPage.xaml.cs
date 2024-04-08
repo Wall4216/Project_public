@@ -29,8 +29,14 @@ namespace Amirhanov_Exam.Pages
 
         private void LoadOrders()
         {
+            var employeeCleaningGroupIds = App.DB.CleaningGroupMembers
+                .Where(member => member.EmployeeID == App.loggedEmployee.EmployeeID)
+                .Select(member => member.GroupID)
+                .Distinct()
+                .ToList();
+
             var orders = App.DB.Orders
-                .Where(order => order.CleaningGroups.Any(group => group.CleaningGroupMembers.Any(member => member.EmployeeID == App.loggedEmployee.EmployeeID)))
+                .Where(order => employeeCleaningGroupIds.Contains(order.CleaningGroupId))
                 .ToList();
 
             OrdersDataGrid.ItemsSource = orders;
@@ -54,6 +60,18 @@ namespace Amirhanov_Exam.Pages
             App.loggedEmployee = null;
 
             NavigationService.Navigate(new LoginPage());
+        }
+
+        private void AddReport_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int orderId = (int)button.CommandParameter;
+            var order = App.DB.Orders.FirstOrDefault(o => o.OrderID == orderId);
+
+            if (order != null && order.StatusID == 3 && App.loggedEmployee.RoleID == 4)
+            {
+                NavigationService.Navigate(new ReportPage(orderId));
+            }
         }
     }
 }

@@ -17,15 +17,14 @@ namespace Amirhanov_Exam.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CleaningGroups()
         {
-            this.CleaningGroupMembers = new HashSet<CleaningGroupMembers>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int GroupID { get; set; }
-        public int OrderID { get; set; }
         public string GroupName { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CleaningGroupMembers> CleaningGroupMembers { get; set; }
-        public virtual Orders Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

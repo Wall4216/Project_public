@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a707e53b3af44715bea774c449229ce9" Name="Diagram1">
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.CleaningGroupMembers" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.CleaningGroups" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.Employees" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.Orders" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.Report" Width="1.5" PointX="10.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.Roles" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Ilnaz_ExamModel.Statuses" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__CleaningG__Emplo__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__CleaningG__Group__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__CleaningG__Order__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__Employees__RoleI__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__Orders__Employee__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__Report__Employee__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__Orders__StatusID__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="Ilnaz_ExamModel.FK__Report__OrderID__49C3F6B7" ManuallyRouted="false" />
+      <Diagram DiagramId="2e2cf3c2e5604f6aa4ab393ff55f72bc" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.CleaningGroupMembers" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CleaningGroups" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employees" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Report" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Roles" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Statuses" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__CleaningG__Emplo__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Orders_CleaningGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Employees__RoleI__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Orders__Employee__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Report__Employee__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Orders__StatusID__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Report__OrderID__49C3F6B7" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

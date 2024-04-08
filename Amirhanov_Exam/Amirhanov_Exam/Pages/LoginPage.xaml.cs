@@ -20,6 +20,11 @@ namespace Amirhanov_Exam.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        public LoginPage()
+        {
+            InitializeComponent();
+        }
+
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             var username = LoginBox.Text;
@@ -28,25 +33,35 @@ namespace Amirhanov_Exam.Pages
 
             var loggedUser = App.DB.Employees.FirstOrDefault(x => x.Login == username && x.Password == password && x.SecretWord == secretWord);
 
-            if (loggedUser == null)
+            if (loggedUser != null)
             {
-                MessageBox.Show("Неверный логин, пароль или секретное слово. Попробуйте снова");
-                return;
-            }
+                App.loggedEmployee = loggedUser;
 
-            App.loggedEmployee = loggedUser;
+                var mainPage = new MainPage();
+                mainPage.Show();
 
-            if (loggedUser.RoleID == 2)
-            {
-                NavigationService.Navigate(new ManagerPage());
-            }
-            else if (loggedUser.RoleID == 3)
-            {
-                NavigationService.Navigate(new CallCenterPage());
+                Page nextPage = null;
+                switch (loggedUser.RoleID)
+                {
+                    case 2:
+                        nextPage = new ManagerPage();
+                        break;
+                    case 3:
+                        nextPage = new CallCenterPage();
+                        break;
+                    default:
+                        nextPage = new CleaningMasterPage();
+                        break;
+                }
+
+                mainPage.NavigateTo(nextPage);
+
+                var loginWindow = Window.GetWindow(this);
+                loginWindow?.Close();
             }
             else
             {
-                NavigationService.Navigate(new CleaningMasterPage());
+                MessageBox.Show("Неверный логин, пароль или секретное слово. Попробуйте снова");
             }
         }
     }

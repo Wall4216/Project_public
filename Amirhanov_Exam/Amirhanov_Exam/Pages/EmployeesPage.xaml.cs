@@ -63,9 +63,9 @@ namespace Amirhanov_Exam.Pages
             EmployeesDataGrid.ItemsSource = filteredEmployees.ToList();
         }
 
-        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddOrderPage());
+            NavigationService.Navigate(new AddEmployeePage());
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -73,6 +73,30 @@ namespace Amirhanov_Exam.Pages
             App.loggedEmployee = null;
 
             NavigationService.Navigate(new LoginPage());
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Employees employeeToDelete = (sender as Button).DataContext as Employees;
+            if (employeeToDelete != null)
+            {
+                App.DB.Employees.Remove(employeeToDelete); 
+                App.DB.SaveChanges(); 
+                LoadEmployees(); 
+            }
+            else
+            {
+                MessageBox.Show("Вы не выбрали сотрудника");
+            }    
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            Employees employeeToEdit = (sender as Button).DataContext as Employees;
+            if (employeeToEdit != null)
+            {
+                NavigationService.Navigate(new EditEmployeePage(employeeToEdit));
+            }
         }
     }
 }

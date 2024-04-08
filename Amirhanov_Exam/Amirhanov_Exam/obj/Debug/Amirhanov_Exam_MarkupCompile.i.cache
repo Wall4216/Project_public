@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Ilnaz\Downloads\Amirhanov_Exam\Amirhanov_Exam\Amirhanov_Exam\obj\Debug\
+C:\Users\admin\Music\Project_public\Amirhanov_Exam\Amirhanov_Exam\obj\Debug\
 Amirhanov_Exam
 none
 false
 DEBUG;TRACE
-C:\Users\Ilnaz\Downloads\Amirhanov_Exam\Amirhanov_Exam\Amirhanov_Exam\App.xaml
-8446389241
+C:\Users\admin\Music\Project_public\Amirhanov_Exam\Amirhanov_Exam\App.xaml
+11-1029632861
 21663793987
-23-792857392
-182056644007
-MainWindow.xaml;Pages\AddEmployeePage.xaml;Pages\AddOrderPage.xaml;Pages\CallCenterPage.xaml;Pages\CleaningMasterPage.xaml;Pages\EmployeesPage.xaml;Pages\LoginPage.xaml;Pages\ManagerPage.xaml;
+27992882635
+18855310881
+MainWindow.xaml;Pages\AddEmployeePage.xaml;Pages\AddOrderPage.xaml;Pages\CallCenterPage.xaml;Pages\CleaningMasterPage.xaml;Pages\EditEmployeePage.xaml;Pages\EmployeesPage.xaml;Pages\LoginPage.xaml;Pages\MainPage.xaml;Pages\ManagerPage.xaml;Pages\ReportPage.xaml;
 
-True
+False
 

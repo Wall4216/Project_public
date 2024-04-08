@@ -17,6 +17,6 @@ namespace Amirhanov_Exam
     public partial class App : Application
     {
         public static Employees loggedEmployee = new Employees();
-        public static Ilnaz_ExamEntities DB = new Ilnaz_ExamEntities();
+        public static Entities3 DB = new Entities3();
     }
 }
